@@ -1,0 +1,77 @@
+# YOLOv8 Training Configuration for Sweet Potato Root Detection
+# Tuskegee AIFARMS Agricultural AI Research
+
+# Model selection
+# Options: yolov8n-seg.pt (nano), yolov8s-seg.pt (small), yolov8m-seg.pt (medium),
+#          yolov8l-seg.pt (large), yolov8x-seg.pt (xlarge)
+model: yolov8m-seg.pt
+
+# Training hyperparameters
+epochs: 100
+imgsz: 640  # Image size (640x640 recommended for YOLOv8)
+batch: 16   # Batch size (reduce if GPU OOM: try 8, 4, or 2)
+optimizer: AdamW  # Options: SGD, Adam, AdamW, NAdam, RAdam, RMSProp
+
+# Learning rate schedule
+lr0: 0.01      # Initial learning rate
+lrf: 0.01      # Final learning rate (lr0 * lrf)
+momentum: 0.937
+weight_decay: 0.0005
+
+# Warmup
+warmup_epochs: 3.0
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+
+# Loss weights
+box: 7.5       # Box loss gain
+cls: 0.5       # Class loss gain
+dfl: 1.5       # DFL loss gain
+pose: 12.0     # Pose loss gain (not used for segmentation)
+kobj: 2.0      # Keypoint object loss gain (not used for segmentation)
+
+# Regularization
+# label_smoothing removed (deprecated in Ultralytics 8.4+)
+nbs: 64        # Nominal batch size
+
+# Data augmentation - Root-specific settings
+# HSV augmentation (handles lighting variations in field conditions)
+hsv_h: 0.015   # Hue augmentation (small for root color consistency)
+hsv_s: 0.7     # Saturation augmentation (higher for soil/background variation)
+hsv_v: 0.4     # Value augmentation (handles lighting variations)
+
+# Geometric augmentations
+degrees: 0.0      # Rotation degrees (0 for roots - orientation matters)
+translate: 0.1    # Translation fraction
+scale: 0.5        # Scale gain (handles varying root sizes)
+shear: 0.0        # Shear degrees
+perspective: 0.0  # Perspective transform
+flipud: 0.0       # Vertical flip probability (0 for roots - gravity matters)
+fliplr: 0.5       # Horizontal flip probability
+
+# Advanced augmentations
+mosaic: 1.0       # Mosaic augmentation probability (helps with overlapping roots)
+mixup: 0.15       # Mixup augmentation probability
+copy_paste: 0.0   # Copy-paste augmentation (useful for small datasets)
+auto_augment: randaugment  # Auto augmentation policy
+erasing: 0.4      # Random erasing probability
+# crop_fraction removed (deprecated in Ultralytics 8.4+)
+
+# Training settings
+save_period: 10   # Save checkpoint every N epochs
+patience: 50      # Early stopping patience
+seed: 42          # Random seed for reproducibility
+deterministic: true
+amp: true         # Automatic Mixed Precision (faster training)
+
+# Segmentation-specific
+overlap_mask: true  # Overlap masks during training
+mask_ratio: 4       # Mask downsampling ratio
+
+# Transfer learning
+pretrained: true    # Use pretrained weights
+freeze: null        # Freeze layers (null = no freezing, or specify layer indices)
+
+# Validation
+val: true           # Validate during training
+plots: true         # Generate training plots

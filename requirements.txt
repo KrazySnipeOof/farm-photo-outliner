@@ -1,0 +1,32 @@
+# Sweet Potato Root Detection - YOLOv8 Training Pipeline
+# Exact versions for reproducibility
+
+# Core ML frameworks
+torch==2.1.0
+torchvision==0.16.0
+ultralytics==8.1.0
+
+# Data handling
+# CRITICAL: NumPy 2.x is incompatible with opencv-python
+# Must use NumPy < 2.0 (opencv-python was compiled for NumPy 1.x)
+numpy<2.0  # Use < 2.0 to avoid _ARRAY_API errors with opencv-python
+pandas==2.1.4
+opencv-python==4.8.1.78
+Pillow==10.1.0
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# Utilities
+tqdm==4.66.1
+pyyaml==6.0.1
+roboflow==1.1.1
+
+# Model export
+onnx==1.15.0
+onnxruntime==1.16.3
+
+# Optional: For Mask R-CNN comparison
+# torchvision (already included)
+# detectron2 (install separately if needed)
