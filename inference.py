@@ -2,6 +2,9 @@
 Sweet Potato Root Detection - Inference Script
 Standalone script for running inference on new images after training.
 
+This pipeline uses YOLOv8 m-seg (medium) for higher capacity and finer segmentation
+masks. Pass a trained best.pt (from the m-seg checkpoint) via --model.
+
 Usage:
     python inference.py --model best.pt --source path/to/images --output results/
 """

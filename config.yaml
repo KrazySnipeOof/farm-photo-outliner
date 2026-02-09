@@ -1,5 +1,6 @@
 # YOLOv8 Training Configuration for Sweet Potato Root Detection
 # Tuskegee AIFARMS Agricultural AI Research
+# We use yolov8m-seg (medium) for higher capacity and finer masks than n (nano).
 
 # Model selection
 # Options: yolov8n-seg.pt (nano), yolov8s-seg.pt (small), yolov8m-seg.pt (medium),
